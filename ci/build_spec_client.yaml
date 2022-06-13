@@ -61,7 +61,7 @@ steps:
   - type: Command
     name: "Build Docker Image"
     command: |
-      docker build -t client --cache-from=type=local,src=./cache --cache-to=type=local,dest=./cache --load ${OCI_PRIMARY_SOURCE_DIR}/src/client
+      docker buildx build -t=client --cache-from=type=local,src=./cache --cache-to=type=local,dest=./cache --load ${OCI_PRIMARY_SOURCE_DIR}/src/client
     onFailure:
       - type: Command
         command: |
