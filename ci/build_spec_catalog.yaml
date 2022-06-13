@@ -61,6 +61,9 @@ steps:
   - type: Command
     name: "Build Docker Image"
     command: |
+      export DOCKER_BUILDKIT=1
+      export DOCKER_CLI_EXPERIMENTAL=enabled
+      docker buildx create --use
       docker buildx build -t=catalog --cache-from=type=local,src=./cache --cache-to=type=local,dest=./cache --load ${OCI_PRIMARY_SOURCE_DIR}/src/catalog
     onFailure:
       - type: Command
