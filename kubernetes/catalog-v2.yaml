@@ -14,25 +14,10 @@
 # limitations under the License.
 #
 
-kind: Service
-apiVersion: v1
-metadata:
-  name: catalog
-  labels:
-    app: catalog
-spec:
-  type: ClusterIP
-  selector:
-    app: catalog
-  ports:
-  - port: 8080
-    targetPort: 8080
-    name: http
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: catalog
+  name: catalog-v2
 spec:
   replicas: 1
   selector:
@@ -45,14 +30,13 @@ spec:
         version: v2
     spec:
       containers:
-      - name: catalog
-        image: ${DOCKER_SERVER}/${REPOSITORY}:${TAG}
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
-        env:
-          - name: app.imageUrl
-            value: "false"
+        - name: catalog
+          image: ${DOCKER_SERVER}/${REPOSITORY}:${TAG}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: app.imageUrl
+              value: "false"
       imagePullSecrets:
         - name: oci-sm-app-secret
----
