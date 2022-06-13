@@ -1,0 +1,58 @@
+version: 0.1
+component: build
+timeoutInSeconds: 10000
+shell: bash
+env:
+  variables:
+    docker_server: nrt.ocir.io
+  vaultVariables:
+    repository: ocid1.vaultsecret.oc1.ap-tokyo-1.amaaaaaassl65iqakvuuwlul5cyj54nli2atekigaglmfg5bom2vttfqw62q
+  exportedVariables:
+    - DOCKER_SERVER
+    - REPOSITORY
+    - TAG
+
+steps:
+  - type: Command
+    name: "Export variables"
+    command: |
+      DOCKER_SERVER=${docker_server}
+      REPOSITORY=${repository}
+      TAG=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "DOCKER_SERVER:" ${DOCKER_SERVER}
+      echo "REPOSITORY:" ${REPOSITORY}
+      echo "TAG:" ${TAG}
+    onFailure:
+      - type: Command
+        commnd: |
+          echo "Failure successfully handled"
+        timeoutInSeconds: 60
+
+  - type: VulnerabilityAudit
+    name: "Vulnerability Audit Step"
+    configuration:
+      buildType: maven
+      pomFilePath: ${OCI_PRIMARY_SOURCE_DIR}/src/catalog/pom.xml
+      maxPermissibleCvssV2Score: 10.0
+      maxPermissibleCvssV3Score: 10.0
+    knowledgeBaseId: ocid1.admknowledgebase.oc1.ap-tokyo-1.amaaaaaassl65iqaxlcyg3cy3fakw4wnrktgjjc4o72ylglzndmjxxro5fea
+    vulnerabilityAuditCompartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+    vulnerabilityAuditName: oci-sm-catalog-audit-${TAG}
+
+  - type: Command
+    name: "Build Docker Image"
+    command: |
+      docker build -t catalog ${OCI_PRIMARY_SOURCE_DIR}/src/catalog
+    onFailure:
+      - type: Command
+        command: |
+          echo "Failure successfully handled"
+        timeoutInSeconds: 60
+
+outputArtifacts:
+  - name: catalog-image
+    type: DOCKER_IMAGE
+    location: catalog
+  - name: catalog-manifest
+    type: BINARY
+    location: kubernetes/catalog.yaml

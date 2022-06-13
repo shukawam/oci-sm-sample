@@ -1,0 +1,73 @@
+kind: VirtualDeploymentBinding
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: client-binding
+  namespace: oci-sm-app
+spec:
+  virtualDeployment:
+    ref:
+      name: client-v1
+      namespace: oci-sm-app
+  target:
+    service:
+      ref:
+        name: client
+        namespace: oci-sm-app
+---
+kind: VirtualDeploymentBinding
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: catalog-v1-binding
+  namespace: oci-sm-app
+spec:
+  virtualDeployment:
+    ref:
+      name: catalog-v1
+      namespace: oci-sm-app
+  target:
+    service:
+      ref:
+        name: catalog
+        namespace: oci-sm-app
+      matchLabels:
+        version: v1
+---
+kind: VirtualDeploymentBinding
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: catalog-v2-binding
+  namespace: oci-sm-app
+spec:
+  virtualDeployment:
+    ref:
+      name: catalog-v2
+      namespace: oci-sm-app
+  target:
+    service:
+      ref:
+        name: catalog
+        namespace: oci-sm-app
+      matchLabels:
+        version: v2
+---
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+kind: IngressGatewayDeployment
+metadata:
+  name: oci-sm-app-ingress-gateway-deployment
+  namespace: oci-sm-app
+spec:
+  ingressGateway:
+    ref:
+      name: oci-sm-app-ingress-gateway
+      namespace: oci-sm-app
+  deployment:
+    autoscaling:
+      minPods: 1
+      maxPods: 1
+  ports:
+    - protocol: TCP
+      port: 8080
+      serviceport: 443
+  service:
+    type: ClusterIP
+---

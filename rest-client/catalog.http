@@ -1,0 +1,9 @@
+@endpoint = http://localhost:8080
+
+GET {{endpoint}}/catalog HTTP/1.1
+
+###
+GET {{endpoint}}/catalog/2 HTTP/1.1
+
+###
+GET {{endpoint}}/greet HTTP/1.1
