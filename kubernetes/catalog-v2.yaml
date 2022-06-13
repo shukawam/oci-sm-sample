@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: catalog
-        image: ${DOCKER_SERVER}/${REPOSITORY}/catalog:${TAG}
+        image: ${DOCKER_SERVER}/${REPOSITORY}:${TAG}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
