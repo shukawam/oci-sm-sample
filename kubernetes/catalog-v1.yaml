@@ -52,7 +52,7 @@ spec:
         - containerPort: 8080
         env:
           - name: app.imageUrl
-            value: "true"
+            value: "false"
       imagePullSecrets:
         - name: oci-sm-app-secret
 ---
