@@ -15,7 +15,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * Catalog resources.
+ * 
  * @author shukawam
  */
 @Path("catalog")
