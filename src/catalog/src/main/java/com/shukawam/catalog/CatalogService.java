@@ -13,8 +13,8 @@ public class CatalogService {
     private final List<Catalog> catalogList = new ArrayList<>();
 
     @Inject
-    public CatalogService(@ConfigProperty(name = "app.imageUrl") boolean isImageUrl) {
-        if (isImageUrl) {
+    public CatalogService(@ConfigProperty(name = "app.imageUrl") String isImageUrl) {
+        if (Boolean.parseBoolean(isImageUrl)) {
             catalogList.add(new Catalog(1, "amber", Department.Eyewear, "Elinor Glasses", 282.00, "http://lorempixel.com/640/480"));
             catalogList.add(new Catalog(2, "cyan", Department.Clothing, "Atlas Shirt", 127.00, "http://lorempixel.com/640/480"));
             catalogList.add(new Catalog(3, "teal", Department.Clothing, "Small Metal Shoes", 232.00, "http://lorempixel.com/640/480"));

@@ -64,7 +64,7 @@ steps:
       export DOCKER_BUILDKIT=1
       export DOCKER_CLI_EXPERIMENTAL=enabled
       docker buildx create --use
-      docker buildx build -t=catalog --cache-from=type=local,src=./cache --cache-to=type=local,dest=./cache --load ${OCI_PRIMARY_SOURCE_DIR}/src/catalog
+      docker buildx build -t=catalog --cache-from=type=local,src=./catalog-cache --cache-to=type=local,dest=./catalog-cache --load ${OCI_PRIMARY_SOURCE_DIR}/src/catalog
     onFailure:
       - type: Command
         command: |
@@ -75,7 +75,7 @@ steps:
     name: "Build Cache Upload"
     timeoutInSeconds: 300
     command: |
-      rm ${build_cache_os_file_name} && zip -r ${build_cache_os_file_name} cache/*
+      rm ${build_cache_os_file_name} && zip -r ${build_cache_os_file_name} catalog-cache/*
       oci os object put --bucket-name build-cache --file ${build_cache_os_file_name} --force
 
 outputArtifacts:
