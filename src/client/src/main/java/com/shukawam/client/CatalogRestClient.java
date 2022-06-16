@@ -8,12 +8,17 @@ import javax.ws.rs.PathParam;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@RegisterRestClient(baseUri = "http://catalog:8080/catalog")
+@RegisterRestClient(baseUri = "http://catalog:8080")
 public interface CatalogRestClient {
     @GET
+    @Path("catalog")
     List<Catalog> getAllCatalog();
 
     @GET
-    @Path("{id}")
+    @Path("catalog/{id}")
     Catalog getCatalog(@PathParam("id") int id);
+
+    @GET
+    @Path("health")
+    Object healthCheck();
 }

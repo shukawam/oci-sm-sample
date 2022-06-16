@@ -30,4 +30,11 @@ public class ClientResource {
     public Catalog getCatalog(@PathParam("id") int id) {
         return catalogRestClient.getCatalog(id);
     }
+
+    @GET
+    @Path("api/health")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object healthCheck() {
+        return catalogRestClient.healthCheck();
+    }
 }
