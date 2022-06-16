@@ -6,4 +6,5 @@ public class Catalog {
     public Department department;
     public String name;
     public double price;
+    public String imageUrl;
 }
