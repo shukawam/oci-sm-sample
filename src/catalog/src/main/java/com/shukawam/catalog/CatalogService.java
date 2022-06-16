@@ -14,6 +14,7 @@ public class CatalogService {
 
     @Inject
     public CatalogService(@ConfigProperty(name = "app.imageUrl") String isImageUrl) {
+        System.out.println(Boolean.parseBoolean(isImageUrl));
         if (Boolean.parseBoolean(isImageUrl)) {
             catalogList.add(new Catalog(1, "amber", Department.Eyewear, "Elinor Glasses", 282.00, "http://lorempixel.com/640/480"));
             catalogList.add(new Catalog(2, "cyan", Department.Clothing, "Atlas Shirt", 127.00, "http://lorempixel.com/640/480"));
