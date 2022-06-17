@@ -9,6 +9,3 @@ GET {{endpoint-local}}/catalog/2 HTTP/1.1
 
 ###
 GET {{endpoint-local}}/greet HTTP/1.1
-
-###
-GET {{endpoint-cluster}}/api/catalog HTTP/1.1
