@@ -140,11 +140,11 @@ spec:
           - virtualDeployment:
               ref:
                 name: catalog-v1
-            weight: 90
+            weight: 50
           - virtualDeployment:
               ref:
                 name: catalog-v2
-            weight: 10
+            weight: 50
 ---
 kind: IngressGateway
 apiVersion: servicemesh.oci.oracle.com/v1beta1
@@ -165,13 +165,13 @@ spec:
       listeners:
         - port: 8080
           protocol: HTTP
-          tls:
-            serverCertificate:
-              ociTlsCertificate:
-                certificateId: ocid1.certificate.oc1.phx.amaaaaaassl65iqaxcxstx6tywvftmozdnnuyns56as5hpmewrwjwe6gcyhq
-            mode: TLS
           # tls:
-          #   mode: DISABLED
+          #   serverCertificate:
+          #     ociTlsCertificate:
+          #       certificateId: ocid1.certificate.oc1.phx.amaaaaaassl65iqaxcxstx6tywvftmozdnnuyns56as5hpmewrwjwe6gcyhq
+          #   mode: TLS
+          tls:
+            mode: DISABLED
   accessLogging:
     isEnabled: true
 ---
@@ -214,6 +214,15 @@ spec:
         virtualService:
           ref:
             name: catalog
+    # - action: ALLOW
+    #   source:
+    #     virtualService:
+    #       ref:
+    #         name: catalog
+    #   destination:
+    #     virtualService:
+    #       ref:
+    #         name: client
     - action: ALLOW
       source:
         ingressGateway:

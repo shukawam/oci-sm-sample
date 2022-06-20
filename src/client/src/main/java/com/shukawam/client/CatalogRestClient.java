@@ -17,12 +17,4 @@ public interface CatalogRestClient {
     @GET
     @Path("/catalog/{id}")
     Catalog getCatalog(@PathParam("id") int id);
-
-    @GET
-    @Path("/health/ready")
-    Object healthCheck();
-
-    @GET
-    @Path("/greet")
-    Object greet();
 }
