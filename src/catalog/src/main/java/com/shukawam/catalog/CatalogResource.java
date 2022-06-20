@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
  * 
  * @author shukawam
  */
-@Path("catalog")
+@Path("/catalog")
 public class CatalogResource {
     private final CatalogService catalogService;
 
@@ -35,7 +35,7 @@ public class CatalogResource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Catalog getCatalog(@PathParam("id") int id) {
         return catalogService.getCatalog(id);

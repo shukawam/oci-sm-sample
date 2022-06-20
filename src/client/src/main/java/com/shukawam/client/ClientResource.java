@@ -11,28 +11,28 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-@Path("api")
+@Path("/api")
 public class ClientResource {
     @Inject
     @RestClient
     private CatalogRestClient catalogRestClient;
 
     @GET
-    @Path("catalog")
+    @Path("/catalog")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Catalog> getAllCatalog() {
         return catalogRestClient.getAllCatalog();
     }
     
     @GET
-    @Path("catalog/{id}")
+    @Path("/catalog/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Catalog getCatalog(@PathParam("id") int id) {
         return catalogRestClient.getCatalog(id);
     }
 
     @GET
-    @Path("health")
+    @Path("/health")
     @Produces(MediaType.APPLICATION_JSON)
     public Object healthCheck() {
         return catalogRestClient.healthCheck();
