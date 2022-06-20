@@ -32,7 +32,7 @@ public class ClientResource {
     }
 
     @GET
-    @Path("api/health")
+    @Path("health")
     @Produces(MediaType.APPLICATION_JSON)
     public Object healthCheck() {
         return catalogRestClient.healthCheck();
