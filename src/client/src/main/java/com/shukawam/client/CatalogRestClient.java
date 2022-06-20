@@ -11,14 +11,18 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @RegisterRestClient(baseUri = "http://catalog:8080")
 public interface CatalogRestClient {
     @GET
-    @Path("catalog")
+    @Path("/catalog")
     List<Catalog> getAllCatalog();
 
     @GET
-    @Path("catalog/{id}")
+    @Path("/catalog/{id}")
     Catalog getCatalog(@PathParam("id") int id);
 
     @GET
-    @Path("health")
+    @Path("/health/ready")
     Object healthCheck();
+
+    @GET
+    @Path("/greet")
+    Object greet();
 }
