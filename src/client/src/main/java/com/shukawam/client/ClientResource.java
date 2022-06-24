@@ -31,23 +31,4 @@ public class ClientResource {
         return catalogRestClient.getCatalog(id);
     }
 
-    /**
-     * for connection test
-     */
-    @GET
-    @Path("/health")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Object healthCheck() {
-        return catalogRestClient.healthCheck();
-    }
-
-    /**
-     * for connection test
-     */
-    @GET
-    @Path("/health")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Object greetCheck() {
-        return catalogRestClient.greet();
-    }
 }
