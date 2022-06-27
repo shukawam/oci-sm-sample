@@ -1,3 +1,4 @@
+---
 apiVersion: servicemesh.oci.oracle.com/v1beta1
 kind: VirtualServiceRouteTable
 metadata:
