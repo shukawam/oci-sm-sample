@@ -26,14 +26,14 @@ class MainTest {
                 .path("greet")
                 .request()
                 .get(JsonObject.class);
-        Assertions.assertEquals("Hello World!", jsonObject.getString("message"),
+        Assertions.assertEquals("Catalog World!", jsonObject.getString("message"),
                 "default message");
 
         jsonObject = target
                 .path("greet/Joe")
                 .request()
                 .get(JsonObject.class);
-        Assertions.assertEquals("Hello Joe!", jsonObject.getString("message"),
+        Assertions.assertEquals("Catalog Joe!", jsonObject.getString("message"),
                 "hello Joe message");
 
         try (Response r = target
