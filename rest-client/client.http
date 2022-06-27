@@ -1,12 +1,4 @@
-@endpoint = http://localhost:8081
-
 @endpoint-cluster = https://sm.shukawam.com
 
 ###
-GET {{endpoint}}/api/catalog HTTP/1.1
-
-###
-GET {{endpoint}}/api/catalog/1 HTTP/1.1
-
-###
-GET {{endpoint-cluster}}/api/catalog HTTP/1.1
+GET http://sm.shukawam.com/api/catalog HTTP/1.1
