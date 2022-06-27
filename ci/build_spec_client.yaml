@@ -43,7 +43,6 @@ steps:
 
   - type: Command
     name: "Docker BuildKit Setup"
-    timeoutInSeconds: 140
     command: |
       wget https://github.com/docker/buildx/releases/download/v0.8.2/buildx-v0.8.2.linux-amd64 -O docker-buildx
       mkdir -p ~/.docker/cli-plugins
