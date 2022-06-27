@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
 public class CatalogService {
-    @ConfigProperty(name = "app.imageUrl")
-    private String isImageUrl;
+
+    private final String isImageUrl;
+
+    @Inject
+    public CatalogService(@ConfigProperty(name = "app.imageUrl")String isImageUrl) {
+        this.isImageUrl = isImageUrl;
+    }
 
     public List<Catalog> getCatalogList() {
         var catalogList = new ArrayList<Catalog>();
