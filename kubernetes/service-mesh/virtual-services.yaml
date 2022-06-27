@@ -1,0 +1,34 @@
+##################################################################################################
+# Client service
+##################################################################################################
+kind: VirtualService
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: client
+  namespace: oci-sm-app
+spec:
+  mesh:
+    ref:
+      name: oci-sm-app
+  defaultRoutingPolicy:
+    type: UNIFORM
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  hosts:
+    - client
+    - client:8080
+---
+kind: VirtualService
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: catalog
+  namespace: oci-sm-app
+spec:
+  mesh:
+    ref:
+      name: oci-sm-app
+  defaultRoutingPolicy:
+    type: UNIFORM
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  hosts:
+    - catalog
+    - catalog:8080

@@ -1,0 +1,58 @@
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+kind: VirtualServiceRouteTable
+metadata:
+  name: client-route-table
+  namespace: oci-sm-app
+spec:
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  virtualService:
+    ref:
+      name: client
+  routeRules:
+    - httpRoute:
+        destinations:
+          - virtualDeployment:
+              ref:
+                name: client-v1
+            weight: 100
+---
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+kind: VirtualServiceRouteTable
+metadata:
+  name: catalog-route-table
+  namespace: oci-sm-app
+spec:
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  virtualService:
+    ref:
+      name: catalog
+  routeRules:
+    - httpRoute:
+        destinations:
+          - virtualDeployment:
+              ref:
+                name: catalog-v1
+            weight: 100
+          - virtualDeployment:
+              ref:
+                name: catalog-v2
+            weight: 0
+---
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+kind: IngressGatewayRouteTable
+metadata:
+  name: oci-sm-app-ingress-gateway-route-table
+  namespace: oci-sm-app
+spec:
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  ingressGateway:
+    ref:
+      name: oci-sm-app-ingress-gateway
+  routeRules:
+    - httpRoute:
+        ingressGatewayHost:
+          name: host
+        destinations:
+          - virtualService:
+              ref:
+                name: client

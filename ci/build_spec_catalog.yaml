@@ -87,6 +87,6 @@ outputArtifacts:
   - name: catalog-v2-manifest
     type: BINARY
     location: kubernetes/catalog-v2.yaml
-  - name: meshify-manifest
+  - name: virtual-service-route-tables-manifest
     type: BINARY
-    location: kubernetes/service-mesh/meshify.yaml
+    location: kubernetes/service-mesh/virtual-service-route-tables.yaml

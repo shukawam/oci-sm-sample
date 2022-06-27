@@ -1,3 +1,32 @@
+kind: IngressGateway
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: oci-sm-app-ingress-gateway
+  namespace: oci-sm-app
+spec:
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  mesh:
+    ref:
+      name: oci-sm-app
+  hosts:
+    - name: host
+      hostnames:
+        - sm.shukawam.com
+        - sm.shukawam.com:80
+        - sm.shukawam.com:443
+      listeners:
+        - port: 8080
+          protocol: HTTP
+          # tls:
+          #   serverCertificate:
+          #     ociTlsCertificate:
+          #       certificateId: ocid1.certificate.oc1.phx.amaaaaaassl65iqaxcxstx6tywvftmozdnnuyns56as5hpmewrwjwe6gcyhq
+          #   mode: TLS
+          tls:
+            mode: DISABLED
+  accessLogging:
+    isEnabled: true
+---
 apiVersion: v1
 kind: Service
 metadata:

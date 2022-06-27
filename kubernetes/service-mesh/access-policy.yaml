@@ -1,0 +1,29 @@
+kind: AccessPolicy
+apiVersion: servicemesh.oci.oracle.com/v1beta1
+metadata:
+  name: oci-sm-app-ingress-policy
+  namespace: oci-sm-app
+spec:
+  mesh:
+    ref:
+      name: oci-sm-app
+  compartmentId: ocid1.compartment.oc1..aaaaaaaanjtbllhqxcg67dq7em3vto2mvsbc6pbgk4pw6cx37afzk3tngmoa
+  rules:
+    - action: ALLOW
+      source:
+        virtualService:
+          ref:
+            name: client
+      destination:
+        virtualService:
+          ref:
+            name: catalog
+    - action: ALLOW
+      source:
+        ingressGateway:
+          ref:
+            name: oci-sm-app-ingress-gateway
+      destination:
+        virtualService:
+          ref:
+            name: client
