@@ -2,3 +2,6 @@
 
 ###
 GET http://sm.shukawam.com/api/catalog HTTP/1.1
+
+###
+GET http://sm.shukawam.com/health HTTP/1.1
