@@ -140,11 +140,11 @@ spec:
           - virtualDeployment:
               ref:
                 name: catalog-v1
-            weight: 70
+            weight: 50
           - virtualDeployment:
               ref:
                 name: catalog-v2
-            weight: 30
+            weight: 50
 ---
 kind: IngressGateway
 apiVersion: servicemesh.oci.oracle.com/v1beta1
@@ -214,15 +214,6 @@ spec:
         virtualService:
           ref:
             name: catalog
-    # - action: ALLOW
-    #   source:
-    #     virtualService:
-    #       ref:
-    #         name: catalog
-    #   destination:
-    #     virtualService:
-    #       ref:
-    #         name: client
     - action: ALLOW
       source:
         ingressGateway:
