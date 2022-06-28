@@ -33,11 +33,11 @@ spec:
           - virtualDeployment:
               ref:
                 name: catalog-v1
-            weight: 100
+            weight: 90
           - virtualDeployment:
               ref:
                 name: catalog-v2
-            weight: 0
+            weight: 10
 ---
 apiVersion: servicemesh.oci.oracle.com/v1beta1
 kind: IngressGatewayRouteTable
