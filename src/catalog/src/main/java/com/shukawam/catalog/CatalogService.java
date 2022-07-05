@@ -15,7 +15,7 @@ public class CatalogService {
 
     public List<Catalog> getCatalogList() {
         var isImageUrl = ConfigProvider.getConfig().getValue("app.imageUrl", String.class);
-        LOGGER.info(isImageUrl);
+        // LOGGER.info(isImageUrl);
         var catalogList = new ArrayList<Catalog>();
         if (Boolean.parseBoolean(isImageUrl)) {
             catalogList.add(new Catalog(1, "amber", Department.Eyewear, "Elinor Glasses", 282.00, "http://lorempixel.com/640/480"));
