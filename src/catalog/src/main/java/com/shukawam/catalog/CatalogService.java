@@ -2,23 +2,20 @@ package com.shukawam.catalog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.config.ConfigProvider;
 
 @ApplicationScoped
 public class CatalogService {
 
-    private final String isImageUrl;
-
-    @Inject
-    public CatalogService(@ConfigProperty(name = "app.imageUrl")String isImageUrl) {
-        this.isImageUrl = isImageUrl;
-    }
+    private static final Logger LOGGER = Logger.getLogger(CatalogService.class.getName());
 
     public List<Catalog> getCatalogList() {
+        var isImageUrl = ConfigProvider.getConfig().getValue("app.imageUrl", String.class);
+        LOGGER.info(isImageUrl);
         var catalogList = new ArrayList<Catalog>();
         if (Boolean.parseBoolean(isImageUrl)) {
             catalogList.add(new Catalog(1, "amber", Department.Eyewear, "Elinor Glasses", 282.00, "http://lorempixel.com/640/480"));

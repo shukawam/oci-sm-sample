@@ -20,7 +20,8 @@ spec:
           image: ${DOCKER_SERVER}/${REPOSITORY}:${TAG}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+          - name: api
+            containerPort: 8080
           env:
             - name: app.imageUrl
               value: "true"
